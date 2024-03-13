@@ -7,4 +7,3 @@ def setup_browser():
         page = browser.new_page()
         yield page
         browser.close()
-
