@@ -3,7 +3,7 @@ import re
 import pytest
 from playwright.sync_api import expect
 
-from pages.HomePage import HomePage
+from pages.home_page import HomePage
 from data.data_for_tests import DataForTest
 
 
@@ -12,10 +12,9 @@ class TestHomePage:
     @pytest.fixture(autouse=True, scope="function")
     def before_tests_fixture(self, setup_browser_fixture):
         self.home_page = HomePage(setup_browser_fixture)
-
+        self.home_page.navigate()
     @pytest.mark.smoke
     def test_title_texts_on_pages(self):
-        self.home_page.navigate()
         assert self.home_page.get_title() == DataForTest.HOME_PAGE_TITLE_TEXT
 
         self.home_page.locator_products_button.click()
