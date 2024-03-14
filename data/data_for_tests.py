@@ -6,3 +6,4 @@ class DataForTest:
     TEST_CASES_PAGE_TITLE_TEXT = 'Automation Practice Website for UI Testing - Test Cases'
     API_TESTING_PAGE_TITLE_TEXT = 'Automation Practice for API Testing'
     CONTACT_US_PAGE_TITLE_TEXT = 'Automation Exercise - Contact Us'
+
