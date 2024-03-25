@@ -1,7 +1,8 @@
 import re
+from idlelib import browser
 
 import pytest
-from playwright.sync_api import expect
+from playwright.sync_api import expect, Page, Browser
 
 from pages.home_page import HomePage
 from data.data_for_tests import DataForTest
@@ -10,8 +11,8 @@ from data.data_for_tests import DataForTest
 class TestHomePage:
 
     @pytest.fixture(autouse=True, scope="function")
-    def before_tests_fixture(self, setup_browser_fixture):
-        self.home_page = HomePage(setup_browser_fixture)
+    def before_tests_fixture(self, page: Page):
+        self.home_page = HomePage(page)
         self.home_page.navigate()
     @pytest.mark.smoke
     def test_title_texts_on_pages(self):
