@@ -16,6 +16,7 @@ class TestHomePage:
         self.home_page.navigate()
     @pytest.mark.smoke
     def test_title_texts_on_pages(self):
+        """Assertions made with pytest (not playwright) for learning"""
         assert self.home_page.get_title() == DataForTest.HOME_PAGE_TITLE_TEXT
 
         self.home_page.locator_products_button.click()

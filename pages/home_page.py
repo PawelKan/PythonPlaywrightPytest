@@ -6,6 +6,7 @@ from pages.base_page import BasePage
 class HomePage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
+        """Find header section, and then find elements in it for rest of the locators"""
         self.locator_header =                       self.page.locator('#header') ##locate top header section
         self.locator_products_button =              self.locator_header.locator(f"text=Products")
         self.locator_cart_button =                  self.locator_header.locator(f"text=Cart") ## in header section, find locator with text Cart
