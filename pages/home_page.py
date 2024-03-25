@@ -1,10 +1,10 @@
 import pytest
-
+from playwright.sync_api import Page
 from pages.base_page import BasePage
 
 
 class HomePage(BasePage):
-    def __init__(self, page):
+    def __init__(self, page: Page):
         super().__init__(page)
         self.locator_header =                       self.page.locator('#header') ##locate top header section
         self.locator_products_button =              self.locator_header.locator(f"text=Products")

@@ -1,9 +1,9 @@
 from pages.base_page import BasePage
-from playwright.sync_api import ElementHandle
+from playwright.sync_api import ElementHandle, Page
 
 
 class LoginPage(BasePage):
-    def __init__(self, page):
+    def __init__(self, page: Page):
         super().__init__(page)
         self.login_form_section = page.locator(".login-form")
         self.login_into_account_heading_locator = self.login_form_section.locator('h2') #with text Login to your account
