@@ -19,21 +19,21 @@ class TestHomePage:
         """Assertions made with pytest (not playwright) for learning"""
         assert self.home_page.get_title() == DataForTest.HOME_PAGE_TITLE_TEXT
 
-        self.home_page.locator_products_button.click()
+        self.home_page.click_products()
         assert self.home_page.get_title() == DataForTest.PRODUCTS_PAGE_TITLE_TEXT
 
-        self.home_page.locator_cart_button.click()
+        self.home_page.click_cart_button()
         assert self.home_page.get_title() == DataForTest.CART_PAGE_TITLE_TEXT
 
-        self.home_page.locator_login_button.click()
+        self.home_page.click_login_button()
         assert self.home_page.get_title() == DataForTest.LOGIN_PAGE_TITLE_TEXT
 
-        self.home_page.locator_test_cases_button.click()
+        self.home_page.click_test_cases_button()
         assert self.home_page.get_title() == DataForTest.TEST_CASES_PAGE_TITLE_TEXT
 
-        self.home_page.locator_API_testing_button.click()
+        self.home_page.click_api_testing_button()
         assert self.home_page.get_title() == DataForTest.API_TESTING_PAGE_TITLE_TEXT
         ##self.home_page.locator_video_tutorials_button.click() ##turned off - page is going to youtube channel
 
-        self.home_page.locator_contact_us_button.click()
+        self.home_page.click_contact_us_button()
         assert self.home_page.get_title() == DataForTest.CONTACT_US_PAGE_TITLE_TEXT

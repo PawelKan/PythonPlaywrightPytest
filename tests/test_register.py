@@ -12,7 +12,7 @@ from pages.register_page import RegisterPage
 
 class TestRegisterPage:
 
-    @pytest.fixture(autouse = True)
+    @pytest.fixture(autouse=True)
     def before_tests(self, page: Page):
         self.login_page = LoginPage(page)
         self.register_page = RegisterPage(page)
