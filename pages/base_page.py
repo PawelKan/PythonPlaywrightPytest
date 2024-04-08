@@ -13,3 +13,6 @@ class BasePage:
 
     def get_title(self):
         return self.page.title()
+
+    def get_url(self):
+        return self.get_url()
