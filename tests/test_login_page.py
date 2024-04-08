@@ -13,7 +13,7 @@ class TestLoginPage:
         #Given
         self.home_page = HomePage(page)
         self.login_page = LoginPage(page)
-        self.login_page.navigate(Urls.LOGIN_PAGE_URL)
+        self.login_page.open_page()
 
     @pytest.mark.functional
     def test_login_into_page_with_correct_user_credentials(self):
