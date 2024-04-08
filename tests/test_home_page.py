@@ -19,13 +19,13 @@ class TestHomePage:
         """Assertions made with pytest (not playwright) for learning"""
         assert self.home_page.get_title() == DataForTest.HOME_PAGE_TITLE_TEXT
 
-        self.home_page.click_on_products()
+        self.home_page.click_products()
         assert self.home_page.get_title() == DataForTest.PRODUCTS_PAGE_TITLE_TEXT
 
-        self.home_page.click_on_cart_button()
+        self.home_page.click_cart_button()
         assert self.home_page.get_title() == DataForTest.CART_PAGE_TITLE_TEXT
 
-        self.home_page.click_on_login_button()
+        self.home_page.click_login_button()
         assert self.home_page.get_title() == DataForTest.LOGIN_PAGE_TITLE_TEXT
 
         self.home_page.click_test_cases_button()

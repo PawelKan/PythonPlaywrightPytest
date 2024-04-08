@@ -19,9 +19,9 @@ class HomePage(BasePage):
         self.locator_logout = self.locator_header.locator(f"text=Logout")
         self.locator_delete_account = self.locator_header.locator(f"text=Delete Account")
 
-    def click_on_products(self): self.locator_products_button.click()
-    def click_on_cart_button(self): self.locator_cart_button.click()
-    def click_on_login_button(self): self.locator_login_button.click()
+    def click_products(self): self.locator_products_button.click()
+    def click_cart_button(self): self.locator_cart_button.click()
+    def click_login_button(self): self.locator_login_button.click()
     def click_test_cases_button(self): self.locator_test_cases_button.click()
     def click_api_testing_button(self): self.locator_api_testing_button.click()
     def click_video_tutorials_button(self): self.locator_video_tutorials_button.click()
