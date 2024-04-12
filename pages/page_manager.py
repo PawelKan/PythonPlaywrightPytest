@@ -11,7 +11,7 @@ class PageManager:
         self.__home_page = HomePage(page)
         self.__login_page = LoginPage(page)
         self.__register_page = RegisterPage(page)
-        self.__register_account_success_page = RegisterAccountSuccessPage(page)
+        self.__success_page_after_registration = RegisterAccountSuccessPage(page)
 
     def on_home_page(self): return self.__home_page
 
@@ -19,4 +19,4 @@ class PageManager:
 
     def on_register_page(self): return self.__register_page
 
-    def on_register_account_success_page(self): return self.__register_account_success_page
+    def on_success_page_after_registration(self): return self.__success_page_after_registration

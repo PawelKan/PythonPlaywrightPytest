@@ -12,13 +12,8 @@ class TestLoginPage:
     @pytest.fixture(autouse=True, scope="function")
     def before_tests_fixture(self, page: Page):
         #Given
-        #self.home_page = HomePage(page)
-        #self.login_page = LoginPage(page)
-
         self.pm = PageManager(page)
         self.pm.on_login_page().open_page()
-
-
 
     @pytest.mark.functional
     def test_login_into_page_with_correct_user_credentials(self):
