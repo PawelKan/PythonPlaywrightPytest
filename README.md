@@ -1,3 +1,10 @@
+## Installation
+- Clone this repository:
+  - git clone git@github.com:PawelKan/PythonPlaywrightPytest.git
+- Navigate to the project directory
+- Install Python dependencies
+  - pip install -r requirements.txt
+
 ## PROJECT STRUCTURE
 - tests/: Contains the test scripts.
 - pages/: Contains page objects or helpers for Playwright.
@@ -15,6 +22,9 @@
 - with markers CLI: pytest -m mark_name eg:
     - pytest -m functional
     - pytest -m smoke
+- run tests parallel with xdist library:
+  - run with maximum workers (threads) - pytest -n auto
+  - run with custom number of threads - pytest -n 6
 
 ## GENERATE HTML RAPORT WITH ALLURE:
 - allure_reports/: folder name with test report 
