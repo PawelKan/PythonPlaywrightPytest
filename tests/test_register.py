@@ -1,3 +1,4 @@
+import allure
 import pytest
 from faker import Faker
 from playwright.sync_api import Page, expect

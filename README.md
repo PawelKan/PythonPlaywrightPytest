@@ -5,6 +5,9 @@
 - Install Python dependencies
   - pip install -r requirements.txt
 
+## INFORMATION
+- Page displays randomly adverts which can break tests.
+
 ## PROJECT STRUCTURE
 - tests/: Contains the test scripts.
 - pages/: Contains page objects or helpers for Playwright.
@@ -25,6 +28,10 @@
 - run tests parallel with xdist library:
   - run with maximum workers (threads) - pytest -n auto
   - run with custom number of threads - pytest -n 6
+- run tests with all browsers (chromium, firefox, webkit) AND with parallel
+  - pytest --browser chromium --browser firefox --browser webkit -n auto
+- run tests on mobile like "Chromium"
+  - pytest --device "Galaxy Note 3"
 
 ## GENERATE HTML RAPORT WITH ALLURE:
 - allure_reports/: folder name with test report 
