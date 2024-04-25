@@ -5,6 +5,7 @@ from playwright.sync_api import Page
 import os
 
 from pytest_playwright.pytest_playwright import context, playwright
+
 @pytest.fixture(scope="session")
 def browser_type_launch_args(browser_type_launch_args):
     return {
@@ -15,8 +16,9 @@ def browser_type_launch_args(browser_type_launch_args):
 
 @pytest.fixture(scope="session")
 def browser_context_args(browser_context_args, playwright):
-    # Ustaw argumenty kontekstu przeglądarki, aby ustawić stan magazynu sesji
+    file_path = os.path.join(os.path.dirname(__file__), "..", "data", "auth.json")
+
     return {
         **browser_context_args,
-        "storage_state": 'data\\auth.json'
+        "storage_state": file_path
     }
