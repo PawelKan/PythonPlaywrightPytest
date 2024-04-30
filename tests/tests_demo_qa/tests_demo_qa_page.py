@@ -8,11 +8,11 @@ class TestDemoQAPage:
     def before_tests_fixture(self, page: Page):
         self.page = page
         page.goto("https://demoqa.com/")
+        self.page.get_by_text("Elements").click()
 
     """tests written without Page Object Pattern for playwright learning purposes"""
     def test_radio_buttons(self):
         """Test NOT genereted with codegen tool"""
-        self.page.get_by_text("Elements").click()
         self.page.get_by_text("Radio Button").click()
 
         #Verify Yes radio button
@@ -61,6 +61,24 @@ class TestDemoQAPage:
         expect(self.page.locator(f'.rt-tbody [role="row"]').first).to_contain_text("20")
         expect(self.page.locator(f'.rt-tbody [role="row"]').first).to_contain_text("3300")
         expect(self.page.locator(f'.rt-tbody [role="row"]').first).to_contain_text("testDepartment")
+
+    def tests_buttons(self):
+        self.page.locator('.menu-list .btn-light#item-4').first.click()
+        # double click
+        # right click
+        # Click Me
+        self.page.locator('text="Click Me"').click()
+        expect(self.page.locator("#dynamicClickMessage")).to_contain_text("You have done a dynamic click")
+
+        self.page.locator("#doubleClickBtn").dblclick()
+        expect(self.page.locator("#doubleClickMessage")).to_contain_text("You have done a double click")
+
+        self.page.locator("#rightClickBtn").click(button="right")
+        expect(self.page.locator("#rightClickMessage")).to_contain_text("You have done a right click")
+
+
+
+
 
 
 
