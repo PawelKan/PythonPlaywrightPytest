@@ -1,16 +1,20 @@
+import os
+
 import pytest
 from playwright.sync_api import Page
 from playwright.sync_api import expect
 
 
 class TestDemoQAPage:
+    """Tests written without Page Object Pattern for Playwright learning purposes"""
     @pytest.fixture(autouse=True, scope="function")
     def before_tests_fixture(self, page: Page):
+        """Open page and click on Elements before each test"""
         self.page = page
         page.goto("https://demoqa.com/")
         self.page.get_by_text("Elements").click()
 
-    """tests written without Page Object Pattern for playwright learning purposes"""
+
     def test_radio_buttons(self):
         """Test NOT genereted with codegen tool"""
         self.page.get_by_text("Radio Button").click()
@@ -29,7 +33,6 @@ class TestDemoQAPage:
 
     def test_web_tables(self):
         #Open Web Tables page
-        self.page.get_by_text("Elements").click()
         self.page.get_by_text("Web Tables").click()
         # Verify column headers names
         expect(self.page.get_by_role('row').first).to_contain_text("First Name")
@@ -76,7 +79,23 @@ class TestDemoQAPage:
         self.page.locator("#rightClickBtn").click(button="right")
         expect(self.page.locator("#rightClickMessage")).to_contain_text("You have done a right click")
 
+    def test_upload_and_download_file(self) -> None:
+        """Go to Upload and Download page and upload and download file"""
+        file_path = os.path.join(os.getcwd(), "tests", "data", "EmptyFileForUploadTest.txt")
 
+        self.page.get_by_text("Upload and Download").click()
+
+        #Download file
+        with self.page.expect_download() as download_info:
+            self.page.get_by_role("link", name="Download").click()
+        download = download_info.value
+        print(download)
+
+        #Upload file
+        self.page.get_by_label("Select a file").set_input_files(file_path)
+
+        #Check message after file upload
+        expect(self.page.get_by_text("C:\\fakepath\\EmptyFileForUploadTest.txt")).to_be_visible()
 
 
 
