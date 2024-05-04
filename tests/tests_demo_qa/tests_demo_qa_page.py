@@ -97,9 +97,49 @@ class TestDemoQAPage:
         #Check message after file upload
         expect(self.page.get_by_text("C:\\fakepath\\EmptyFileForUploadTest.txt")).to_be_visible()
 
+    def test_forms_practice_forms(self):
+        self.page.get_by_text("Forms").click()
+        self.page.get_by_text("Practice Form").click()
 
+        self.page.get_by_placeholder("First Name").fill("testFirstName")
+        self.page.get_by_placeholder("Last Name").fill("testLastName")
+        self.page.get_by_placeholder(f'name@example.com').fill("testMail@testmailexercisenotavailable.pl")
+        self.page.locator('[for=\'gender-radio-1\']').click() #click on male radio button
+        self.page.get_by_placeholder("Mobile Number").fill("1234567890")
 
+        #select date of birth
+        self.page.locator("#dateOfBirthInput").click()
+        self.page.get_by_role("button", name="Next Month", exact=True).click()
+        self.page.locator('[role="option"]').filter(has_text="17").first.click()
 
+        #Subject
+        self.page.locator("#subjectsInput").fill("Math")
+        self.page.get_by_text("Maths", exact=True).click()
 
+        self.page.get_by_text("Sports").click()
+        self.page.get_by_placeholder("Current Address").fill("testCurrentAddress")
 
+        #Select Stage
+        self.page.locator("#stateCity-wrapper").filter(has_text="Select State").click()
+        self.page.get_by_text("NCR", exact=True).click()
+        #Select City
+        self.page.locator("#stateCity-wrapper").get_by_text("Select City", exact=True).click()
+        self.page.get_by_text("Delhi", exact=True).click()
+        #Submit form
+        self.page.get_by_role("button", name="Submit").click()
 
+        expect(self.page.locator(".modal-content")).to_be_visible()
+        expect(self.page.locator(".modal-content").filter(has_text="Thanks for submitting the form")).to_be_visible()
+        expect(self.page.locator(".modal-content.modal-content tr th").first).to_contain_text("Label")
+        expect(self.page.locator(".modal-content.modal-content tr th").last).to_contain_text("Values")
+
+        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Student Name")).to_be_visible()
+        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Student Email")).to_be_visible()
+        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Gender")).to_be_visible()
+        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Mobile")).to_be_visible()
+        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Date of Birth")).to_be_visible()
+        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Subjects")).to_be_visible()
+        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Hobbies")).to_be_visible()
+        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Picture")).to_be_visible()
+        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Address").first).to_be_visible()
+        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="State and City")).to_be_visible()
