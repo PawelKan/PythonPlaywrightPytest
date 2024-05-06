@@ -4,7 +4,7 @@ from faker import Faker
 from playwright.sync_api import Page, expect
 from data.data_countries import COUNTRY
 from pages.page_manager import PageManager
-from data.user_data import UserTestData
+from data.user_data_test_generator import UserDataTestGenerator
 
 class TestRegisterPage:
 
@@ -15,7 +15,7 @@ class TestRegisterPage:
 
     @pytest.mark.functional
     def test_register_new_user(self):
-        random_user_data = UserTestData.get_random_user_data()
+        random_user_data = UserDataTestGenerator.get_random_user_data()
         #Go to Login Page and
         self.pm.on_login_page().fill_sign_up_form(random_user_data["name"], random_user_data["email"])
         expect(self.pm.on_register_page().enter_account_information_header_locator).to_be_visible()

@@ -2,7 +2,7 @@ from faker import Faker
 from data.data_countries import COUNTRY
 
 
-class UserTestData:
+class UserDataTestGenerator:
     def __init__(self):
         self.random_user_data = None
         self.fake = Faker()
