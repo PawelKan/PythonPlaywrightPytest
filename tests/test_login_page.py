@@ -21,8 +21,8 @@ class TestLoginPage:
         self.pm.on_login_page().login_into_page(UsersData.VALID_USER_EMAIL, UsersData.VALID_USER_PASS)
 
         #Then
-        expect(self.pm.on_home_page().locator_logout).to_be_visible()
-        expect(self.pm.on_home_page().locator_delete_account).to_be_visible()
+        expect(self.pm.on_home_page().locator_logout_button).to_be_visible()
+        expect(self.pm.on_home_page().locator_delete_account_button).to_be_visible()
 
     @pytest.mark.functional
     def test_try_to_login_into_page_with_incorrect_user_mail(self):
@@ -30,12 +30,12 @@ class TestLoginPage:
         self.pm.on_login_page().login_into_page("invalidUserEmail", UsersData.VALID_USER_PASS)
 
         #Then
-        expect(self.pm.on_home_page().locator_logout).not_to_be_visible()
-        expect(self.pm.on_home_page().locator_delete_account).not_to_be_visible()
+        expect(self.pm.on_home_page().locator_logout_button).not_to_be_visible()
+        expect(self.pm.on_home_page().locator_delete_account_button).not_to_be_visible()
     def test_try_to_login_into_page_with_incorrect_user_password(self):
         #When
         self.pm.on_login_page().login_into_page(UsersData.VALID_USER_EMAIL, "invalidUserPassword123)(")
 
         #Then
-        expect(self.pm.on_home_page().locator_logout).not_to_be_visible()
-        expect(self.pm.on_home_page().locator_delete_account).not_to_be_visible()
+        expect(self.pm.on_home_page().locator_logout_button).not_to_be_visible()
+        expect(self.pm.on_home_page().locator_delete_account_button).not_to_be_visible()

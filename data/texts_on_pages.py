@@ -1,4 +1,4 @@
-class DataForTest:
+class TextsOnPages:
     HOME_PAGE_TITLE_TEXT = 'Automation Exercise'
     PRODUCTS_PAGE_TITLE_TEXT = 'Automation Exercise - All Products'
     CART_PAGE_TITLE_TEXT = 'Automation Exercise - Checkout'
