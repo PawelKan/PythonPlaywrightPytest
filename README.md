@@ -15,8 +15,8 @@
 - allure_reports/: Directory where Allure test results are stored.
 
 ## CONFIGURATION FOR TESTS:
-- Viewport width: 1920 px
-- Viewport Height: 1080 px
+- Default Viewport width: 1920 px
+- Default Viewport Height: 1080 px
 - Headless
 
 ## RUN TESTS SCRIPTS:
@@ -32,6 +32,9 @@
   - pytest --browser chromium --browser firefox --browser webkit -n auto
 - run tests on mobile like "Chromium"
   - pytest --device "Galaxy Note 3"
+- run tests with custom viewport size
+  - pytest --width=1440 --height=800
+
 
 ## GENERATE HTML RAPORT WITH ALLURE:
 - allure_reports/: folder name with test report 
