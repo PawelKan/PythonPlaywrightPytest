@@ -7,6 +7,7 @@ from playwright.sync_api import expect
 
 class TestDemoQAPage:
     """Tests written without Page Object Pattern for Playwright learning purposes"""
+
     @pytest.fixture(autouse=True, scope="function")
     def before_tests_fixture(self, page: Page):
         """Open page and click on Elements before each test"""
@@ -14,13 +15,12 @@ class TestDemoQAPage:
         page.goto("https://demoqa.com/")
         self.page.get_by_text("Elements").click()
 
-
     def test_radio_buttons(self):
         """Test NOT genereted with codegen tool"""
         self.page.get_by_text("Radio Button").click()
 
         #Verify Yes radio button
-        expect(self.page.locator(".mt-3")).not_to_be_visible() # information is not visible
+        expect(self.page.locator(".mt-3")).not_to_be_visible()  # information is not visible
         self.page.get_by_text("Yes").check()
         expect(self.page.locator(".mt-3")).to_contain_text("You have selected Yes")
 
@@ -60,7 +60,8 @@ class TestDemoQAPage:
 
         expect(self.page.locator(f'.rt-tbody [role="row"]').first).to_contain_text("testFirstName")
         expect(self.page.locator(f'.rt-tbody [role="row"]').first).to_contain_text("testLastName")
-        expect(self.page.locator(f'.rt-tbody [role="row"]').first).to_contain_text("testMail@testmailexercisenotavailable.pl")
+        expect(self.page.locator(f'.rt-tbody [role="row"]').first).to_contain_text(
+            "testMail@testmailexercisenotavailable.pl")
         expect(self.page.locator(f'.rt-tbody [role="row"]').first).to_contain_text("20")
         expect(self.page.locator(f'.rt-tbody [role="row"]').first).to_contain_text("3300")
         expect(self.page.locator(f'.rt-tbody [role="row"]').first).to_contain_text("testDepartment")
@@ -104,7 +105,7 @@ class TestDemoQAPage:
         self.page.get_by_placeholder("First Name").fill("testFirstName")
         self.page.get_by_placeholder("Last Name").fill("testLastName")
         self.page.get_by_placeholder(f'name@example.com').fill("testMail@testmailexercisenotavailable.pl")
-        self.page.locator('[for=\'gender-radio-1\']').click() #click on male radio button
+        self.page.locator('[for=\'gender-radio-1\']').click()  #click on male radio button
         self.page.get_by_placeholder("Mobile Number").fill("1234567890")
 
         #select date of birth
@@ -133,13 +134,42 @@ class TestDemoQAPage:
         expect(self.page.locator(".modal-content.modal-content tr th").first).to_contain_text("Label")
         expect(self.page.locator(".modal-content.modal-content tr th").last).to_contain_text("Values")
 
-        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Student Name")).to_be_visible()
-        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Student Email")).to_be_visible()
+        expect(
+            self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Student Name")).to_be_visible()
+        expect(
+            self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Student Email")).to_be_visible()
         expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Gender")).to_be_visible()
         expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Mobile")).to_be_visible()
-        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Date of Birth")).to_be_visible()
+        expect(
+            self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Date of Birth")).to_be_visible()
         expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Subjects")).to_be_visible()
         expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Hobbies")).to_be_visible()
         expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Picture")).to_be_visible()
-        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Address").first).to_be_visible()
-        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell", name="State and City")).to_be_visible()
+        expect(
+            self.page.locator(".modal-content.modal-content").get_by_role("cell", name="Address").first).to_be_visible()
+        expect(self.page.locator(".modal-content.modal-content").get_by_role("cell",
+                                                                             name="State and City")).to_be_visible()
+
+    def test_alerts_page(self):
+        #Go to alerts page
+        self.page.get_by_text("Alerts, Frame & Windows").click()
+        self.page.locator("li").filter(has_text="Alerts").click()
+
+        # confirm "Click Button to see alert" alert
+        self.page.locator("#alertButton").click()
+        self.page.once("dialog", lambda dialog: dialog.accept())
+
+        # confirm "On button click, alert will appear after 5 seconds" alert
+        self.page.locator("#timerAlertButton").click()
+        self.page.wait_for_event("dialog", timeout=5500)
+        self.page.once("dialog", lambda dialog: dialog.accept())
+
+        # confirm "On button click, confirm box will appear" alert
+        # with accept
+        self.page.locator("#confirmButton").click()
+        self.page.once("dialog", lambda dialog: dialog.accept())
+        expect(self.page.locator('#confirmResult')).to_contain_text("You selected Ok")
+
+        # confirm "On button click, prompt box will appear" alert
+        self.page.locator("#promtButton").click()
+        self.page.once("dialog", lambda dialog: dialog.accept())
