@@ -4,14 +4,14 @@ pipeline {
   stage('Stage 1') {
       steps {
         script {
-          echo 'Stage 111'
+          echo 'Stage 1'
         }
       }
     }
   stage('Stage 2') {
       steps {
         script {
-          echo 'Stage 2111'
+          echo 'Stage 2'
         }
       }
     }
