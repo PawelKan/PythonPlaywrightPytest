@@ -1,19 +1,23 @@
 pipeline {
-  agent any
-  stages {
-  stage('Stage 1') {
-      steps {
-        script {
-          echo 'Stage 11a2adw2aaadddaaa11'
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                //get data from repository
+                git 'https://github.com/PawelKan/PythonPlaywrightPytest'
+            }
         }
-      }
-    }
-  stage('Stage 2') {
-      steps {
-        script {
-          echo 'Stage 22aasaadadddaaa121'
+        stage('Install dependencies') {
+            steps {
+                // install dependencies
+                sh 'pip install -r requirements.txt'
+            }
         }
-      }
+        stage('Run tests') {
+            steps {
+                // run tests (simple run)
+                sh 'pytest'
+            }
+        }
     }
-  }
 }
