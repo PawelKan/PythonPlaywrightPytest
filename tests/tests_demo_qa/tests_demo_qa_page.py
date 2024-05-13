@@ -173,3 +173,24 @@ class TestDemoQAPage:
         # confirm "On button click, prompt box will appear" alert
         self.page.locator("#promtButton").click()
         self.page.once("dialog", lambda dialog: dialog.accept())
+
+    def test_modals_page(self):
+        self.page.get_by_text("Alerts, Frame & Windows").click()
+        self.page.locator("li").filter(has_text="Modal Dialogs").click()
+
+        #Verify small modal
+        self.page.locator('#showSmallModal').click()
+        expect(self.page.locator('.modal-header')).to_contain_text("Small Modal")
+        expect(self.page.locator('.modal-body')).to_contain_text("This is a small modal. It has very less content")
+        expect(self.page.locator('#closeSmallModal')).to_have_text("Close")
+        self.page.locator('#closeSmallModal').click()
+        expect(self.page.locator('.modal-header')).not_to_be_visible()
+
+        #Verifyl Large Modal
+        self.page.locator('#showLargeModal').click()
+        expect(self.page.locator('.modal-header')).to_contain_text("Large Modal")
+        expect(self.page.locator('.modal-body')).to_contain_text("It was popularised in the 1960s with the release of")
+        expect(self.page.locator('#closeLargeModal')).to_have_text("Close")
+        self.page.locator('#closeLargeModal').click()
+        expect(self.page.locator('.modal-header')).not_to_be_visible()
+
