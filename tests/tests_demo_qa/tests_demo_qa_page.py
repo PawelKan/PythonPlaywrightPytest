@@ -194,3 +194,17 @@ class TestDemoQAPage:
         self.page.locator('#closeLargeModal').click()
         expect(self.page.locator('.modal-header')).not_to_be_visible()
 
+    def test_slider_page(self):
+        self.page.get_by_text("Widgets").click()
+        self.page.locator("li").filter(has_text="Slider").click()
+        self.page.get_by_role("slider").fill("0")
+        expect(self.page.locator("#sliderValue")).to_have_value("0")
+        self.page.get_by_role("slider").fill("100")
+        expect(self.page.locator("#sliderValue")).to_have_value("100")
+        # check click on slider
+        self.page.get_by_role("slider").click()
+        expect(self.page.locator("#sliderValue")).to_have_value("50")
+
+
+
+
