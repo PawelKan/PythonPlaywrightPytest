@@ -205,6 +205,37 @@ class TestDemoQAPage:
         self.page.get_by_role("slider").click()
         expect(self.page.locator("#sliderValue")).to_have_value("50")
 
+    def test_progress_bar_page(self):
+        self.page.get_by_text("Widgets").click()
+        self.page.locator("li").filter(has_text="Progress Bar").click()
+        #click starts button and wait it goes 33%. Then click stop
+        self.page.locator("#startStopButton").click()
+        expect(self.page.locator("#startStopButton")).to_have_text("Stop")
+
+        while True:
+            if (self.page.locator("#progressBar .progress-bar").get_attribute("aria-valuenow")) == "33":
+                self.page.locator("#startStopButton").click()
+                break
+        # verify if Progress Bar really stopped and check if it has 33% after 2 seconds
+        expect(self.page.locator("#startStopButton")).to_have_text("Start")
+        self.page.wait_for_timeout(2000)
+        expect(self.page.locator("#progressBar .progress-bar")).to_have_text("33%")
+        expect(self.page.locator('#progressBar .progress-bar')).to_have_css('background-color', 'rgb(23, 162, 184)')
+
+
+        #click Start again, and wait until it goes to 100%. Check color change to green and Button text changed to Reset
+        self.page.locator("#startStopButton").click()
+        expect(self.page.locator('#resetButton')).to_have_text("Reset", timeout=30000)
+        expect(self.page.locator('#progressBar .progress-bar')).to_have_css('background-color', 'rgb(40, 167, 69)')
+
+        #click Reset, and verify button text is Start, and progress bar is grey
+        self.page.locator('#resetButton').click()
+        expect(self.page.locator('#startStopButton')).to_have_text("Start")
+        expect(self.page.locator('#progressBar')).to_have_css('background-color', 'rgb(233, 236, 239)')
+
+
+
+
 
 
 
