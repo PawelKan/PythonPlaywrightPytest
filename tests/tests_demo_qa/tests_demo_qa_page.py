@@ -233,9 +233,23 @@ class TestDemoQAPage:
         expect(self.page.locator('#startStopButton')).to_have_text("Start")
         expect(self.page.locator('#progressBar')).to_have_css('background-color', 'rgb(233, 236, 239)')
 
-
-
-
-
-
-
+    def test_tooltip(self):
+        self.page.get_by_text("Widgets").click()
+        self.page.locator("li").filter(has_text="Tool Tips").click()
+        #check page elements
+        expect(self.page.locator("#buttonToolTopContainer > p")).to_have_text("Practice Tool Tips")
+        expect(self.page.locator("#toolTipButton")).to_have_text("Hover me to see")
+        expect(self.page.locator("#texFieldToolTopContainer > input")).to_have_attribute("placeholder", "Hover me to see")
+        expect(self.page.locator("#texToolTopContainer")).to_contain_text("to popular belief, Lorem Ipsum is not simply random text. ")
+        # check button hover text
+        self.page.locator("#toolTipButton").hover()
+        expect(self.page.get_by_role('tooltip').get_by_text("You hovered over the Button")).to_be_visible()
+        # check textbox hover text
+        self.page.locator("#texFieldToolTopContainer > input").hover()
+        expect(self.page.get_by_role('tooltip').get_by_text("You hovered over the text field")).to_be_visible()
+        # check link Contrary hover text
+        self.page.locator("#texToolTopContainer > a").first.hover()
+        expect(self.page.get_by_role('tooltip').get_by_text("You hovered over the Contrary")).to_be_visible()
+        # check link 1.10.32 hover text
+        self.page.locator("#texToolTopContainer > a").last.hover()
+        expect(self.page.get_by_role('tooltip').get_by_text("You hovered over the 1.10.32")).to_be_visible()
