@@ -8,13 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Debug') {
-    steps {
-        bat 'echo %PATH%'
-        bat 'dir'
-        bat 'where python'
-    }
-}
         stage('Checkout') {
             steps {
                 // Pobranie kodu źródłowego z repozytorium
@@ -55,7 +48,7 @@ pipeline {
                     // Aktywacja wirtualnego środowiska i uruchomienie testów
                     bat """
                     call %PYTHON_ENV%\\Scripts\\activate
-                    pytest --disable-warnings
+                    pytest -n auto --disable-warnings
                     """
                 }
             }
