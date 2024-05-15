@@ -1,22 +1,63 @@
+//Created with chatgpt for training
 pipeline {
     agent any
+
+    environment {
+        // Definiowanie zmiennej środowiskowej dla wirtualnego środowiska
+        PYTHON_ENV = 'venv'
+    }
+
     stages {
+        stage('Debug') {
+    steps {
+        bat 'echo %PATH%'
+        bat 'dir'
+        bat 'where python'
+    }
+}
         stage('Checkout') {
             steps {
-                //get data from repository
+                // Pobranie kodu źródłowego z repozytorium
                 git 'https://github.com/PawelKan/PythonPlaywrightPytest'
             }
         }
-        stage('Install dependencies') {
+
+        stage('Setup Python Environment') {
             steps {
-                // install dependencies
-                sh 'pip install -r requirements.txt'
+                script {
+                    // Utworzenie wirtualnego środowiska
+                    bat 'python -m venv %PYTHON_ENV%'
+                    // Aktywacja wirtualnego środowiska i instalacja zależności
+                    bat """
+                    call %PYTHON_ENV%\\Scripts\\activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
+                    """
+                }
             }
         }
-        stage('Run tests') {
+
+        stage('Run Playwright Install') {
             steps {
-                // run tests (simple run)
-                sh 'pytest'
+                script {
+                    // Instalacja przeglądarek Playwright
+                    bat """
+                    call %PYTHON_ENV%\\Scripts\\activate
+                    playwright install
+                    """
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Aktywacja wirtualnego środowiska i uruchomienie testów
+                    bat """
+                    call %PYTHON_ENV%\\Scripts\\activate
+                    pytest --disable-warnings
+                    """
+                }
             }
         }
     }
