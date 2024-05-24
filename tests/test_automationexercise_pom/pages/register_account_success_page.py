@@ -1,8 +1,7 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
-from data.data_countries import COUNTRY
-from pages.base_page import BasePage
-from translations.en_texts_on_register_page import *
+from tests.test_automationexercise_pom.pages.base_page import BasePage
+
 
 class RegisterAccountSuccessPage(BasePage):
     def __init__(self, page: Page):

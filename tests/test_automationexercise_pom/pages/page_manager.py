@@ -1,9 +1,9 @@
 from playwright.sync_api import Page
 
-from pages.home_page import HomePage
-from pages.login_page import LoginPage
-from pages.register_account_success_page import RegisterAccountSuccessPage
-from pages.register_page import RegisterPage
+from tests.test_automationexercise_pom.pages.home_page import HomePage
+from tests.test_automationexercise_pom.pages.login_page import LoginPage
+from tests.test_automationexercise_pom.pages.register_account_success_page import RegisterAccountSuccessPage
+from tests.test_automationexercise_pom.pages.register_page import RegisterPage
 
 
 class PageManager:

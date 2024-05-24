@@ -1,10 +1,9 @@
-import allure
 import pytest
-from faker import Faker
 from playwright.sync_api import Page, expect
-from data.data_countries import COUNTRY
-from pages.page_manager import PageManager
+
 from data.user_data_test_generator import UserDataTestGenerator
+from tests.test_automationexercise_pom.pages.page_manager import PageManager
+
 
 class TestRegisterPage:
 

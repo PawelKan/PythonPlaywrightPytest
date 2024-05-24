@@ -1,6 +1,6 @@
 from data.urls import Urls
-from pages.base_page import BasePage
-from playwright.sync_api import ElementHandle, Page
+from tests.test_automationexercise_pom.pages.base_page import BasePage
+from playwright.sync_api import Page
 
 
 class LoginPage(BasePage):
