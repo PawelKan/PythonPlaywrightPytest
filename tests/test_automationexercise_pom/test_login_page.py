@@ -1,10 +1,8 @@
 import pytest
 from playwright.sync_api import Page, expect
+
 from data.data_users_credentials import UsersData
-from data.urls import Urls
-from pages.home_page import HomePage
-from pages.login_page import LoginPage
-from pages.page_manager import PageManager
+from tests.test_automationexercise_pom.pages.page_manager import PageManager
 
 
 class TestLoginPage:

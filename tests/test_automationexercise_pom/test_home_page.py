@@ -1,20 +1,16 @@
-import re
-from idlelib import browser
-
 import pytest
-from playwright.sync_api import expect, Page, Browser
+from playwright.sync_api import Page
 
-from data.urls import Urls
-from pages.home_page import HomePage
 from data.texts_on_pages import TextsOnPages
-from pages.page_manager import PageManager
+from data.urls import Urls
+from tests.test_automationexercise_pom.pages.page_manager import PageManager
 
 class TestHomePage:
 
     @pytest.fixture(autouse=True, scope="function")
     def before_tests_fixture(self, page: Page):
         self.pm = PageManager(page)
-        self.pm.on_home_page().navigate()
+        self.pm.on_home_page().open_page()
     @pytest.mark.smoke
     def test_title_texts_on_pages(self):
         """Assertions made with pytest (not playwright) for learning"""

@@ -1,6 +1,7 @@
-import pytest
 from playwright.sync_api import Page
-from pages.base_page import BasePage
+
+from data.urls import Urls
+from tests.test_automationexercise_pom.pages.base_page import BasePage
 
 
 class HomePage(BasePage):
@@ -19,6 +20,8 @@ class HomePage(BasePage):
         self.locator_logout_button = self.locator_header.locator(f"text=Logout")
         self.locator_delete_account_button = self.locator_header.locator(f"text=Delete Account")
 
+    def open_page(self):
+        super().navigate(Urls.BASE_URL)
     def click_products(self): self.locator_products_button.click()
     def click_cart_button(self): self.locator_cart_button.click()
     def click_login_button(self): self.locator_login_button.click()
